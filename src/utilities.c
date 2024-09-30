@@ -35,7 +35,7 @@
 #include "utilities.h"
 
 // used on contigous vectors
-void  vectors_add(double* A, double* B, int L)
+void  vectors_add(float* A, float* B, int L)
 {
   int l = 0;
   while ( l < L ) {
@@ -44,7 +44,7 @@ void  vectors_add(double* A, double* B, int L)
   }
 }
 
-void  vectors_add_scalar(double* A, double B, int L)
+void  vectors_add_scalar(float* A, float B, int L)
 {
   int l = 0;
   while ( l < L ) {
@@ -53,7 +53,7 @@ void  vectors_add_scalar(double* A, double B, int L)
   }
 }
 
-void  vectors_scalar_multiply(double* A, double d, int L)
+void  vectors_scalar_multiply(float* A, float d, int L)
 {
   int l = 0;
   while ( l < L ) {
@@ -63,7 +63,7 @@ void  vectors_scalar_multiply(double* A, double d, int L)
 }
 
 // A = A + (B * s)
-void  vectors_add_scalar_multiply(double* A, double* B, int L, double s)
+void  vectors_add_scalar_multiply(float* A, float* B, int L, float s)
 {
   int l = 0;
   while ( l < L ) {
@@ -72,7 +72,7 @@ void  vectors_add_scalar_multiply(double* A, double* B, int L, double s)
   }
 }
 
-void  vectors_substract(double* A, double* B, int L)
+void  vectors_substract(float* A, float* B, int L)
 {
   int l = 0;
   while ( l < L ) {
@@ -81,7 +81,7 @@ void  vectors_substract(double* A, double* B, int L)
   }
 }
 
-void  vectors_div(double* A, double* B, int L)
+void  vectors_div(float* A, float* B, int L)
 {
   int l = 0;
   while ( l < L ) {
@@ -90,7 +90,7 @@ void  vectors_div(double* A, double* B, int L)
   }
 }
 
-void  vector_sqrt(double* A, int L)
+void  vector_sqrt(float* A, int L)
 {
   int l = 0;
   while ( l < L ) {
@@ -99,7 +99,7 @@ void  vector_sqrt(double* A, int L)
   }
 }
 // A = A - (B * s)
-void  vectors_substract_scalar_multiply(double* A, double* B, int L, double s)
+void  vectors_substract_scalar_multiply(float* A, float* B, int L, float s)
 {
   int l = 0;
   while ( l < L ) {
@@ -109,7 +109,7 @@ void  vectors_substract_scalar_multiply(double* A, double* B, int L, double s)
 }
 
 
-void  vectors_multiply(double* A, double* B, int L)
+void  vectors_multiply(float* A, float* B, int L)
 {
   int l = 0;
   while ( l < L ) {
@@ -117,7 +117,7 @@ void  vectors_multiply(double* A, double* B, int L)
     ++l;
   }
 }
-void  vectors_mutliply_scalar(double* A, double b, int L)
+void  vectors_mutliply_scalar(float* A, float b, int L)
 {
   int l = 0;
   while ( l < L ) {
@@ -126,14 +126,14 @@ void  vectors_mutliply_scalar(double* A, double b, int L)
   }
 } 
 
-int   init_random_matrix(double*** A, int R, int C)
+int   init_random_matrix(float*** A, int R, int C)
 {
   int r = 0, c = 0;
 
-  *A = e_calloc(R, sizeof(double*));
+  *A = e_calloc(R, sizeof(float*));
 
   while ( r < R ) {
-    (*A)[r] = e_calloc(C, sizeof(double));
+    (*A)[r] = e_calloc(C, sizeof(float));
     ++r;
   }
 
@@ -151,11 +151,11 @@ int   init_random_matrix(double*** A, int R, int C)
   return 0;
 }
 
-double*   get_random_vector(int L, int R) {
+float*   get_random_vector(int L, int R) {
   
   int l = 0;
-  double *p;
-  p = e_calloc(L, sizeof(double));
+  float *p;
+  p = e_calloc(L, sizeof(float));
 
   while ( l < L ) {
     p[l] = randn(0,1) / sqrt( R / 5 );
@@ -166,14 +166,14 @@ double*   get_random_vector(int L, int R) {
 
 }
 
-double**  get_random_matrix(int R, int C)
+float**  get_random_matrix(int R, int C)
 {
   int r = 0, c = 0;
-  double ** p;
-  p = e_calloc(R, sizeof(double*));
+  float ** p;
+  p = e_calloc(R, sizeof(float*));
 
   while ( r < R ) {
-    p[r] = e_calloc(C, sizeof(double));
+    p[r] = e_calloc(C, sizeof(float));
     ++r;
   }
 
@@ -182,7 +182,7 @@ double**  get_random_matrix(int R, int C)
   while ( r < R ) {
     c = 0;
     while ( c < C ) {
-      p[r][c] =  ((( (double) rand() ) / RAND_MAX) ) / sqrt( R / 2.0 ); 
+      p[r][c] =  ((( (float) rand() ) / RAND_MAX) ) / sqrt( R / 2.0 ); 
       ++c;
     }
     ++r;
@@ -191,14 +191,14 @@ double**  get_random_matrix(int R, int C)
   return p;
 }
 
-double**  get_zero_matrix(int R, int C)
+float**  get_zero_matrix(int R, int C)
 {
   int r = 0, c = 0;
-  double ** p;
-  p = e_calloc(R, sizeof(double*));
+  float ** p;
+  p = e_calloc(R, sizeof(float*));
 
   while ( r < R ) {
-    p[r] = e_calloc(C, sizeof(double));
+    p[r] = e_calloc(C, sizeof(float));
 
     ++r;
   }
@@ -217,14 +217,14 @@ double**  get_zero_matrix(int R, int C)
   return p;
 }
 
-int   init_zero_matrix(double*** A, int R, int C)
+int   init_zero_matrix(float*** A, int R, int C)
 {
   int r = 0, c = 0;
 
-  *A = e_calloc(R, sizeof(double*));
+  *A = e_calloc(R, sizeof(float*));
 
   while ( r < R ) {
-    (*A)[r] = e_calloc(C, sizeof(double));
+    (*A)[r] = e_calloc(C, sizeof(float));
 
     ++r;
   }
@@ -243,7 +243,7 @@ int   init_zero_matrix(double*** A, int R, int C)
   return 0;
 }
 
-int   free_matrix(double** A, int R)
+int   free_matrix(float** A, int R)
 {
   int r = 0;
   while ( r < R ) {
@@ -254,10 +254,10 @@ int   free_matrix(double** A, int R)
   return 0;
 }
 
-int   init_zero_vector(double** V, int L) 
+int   init_zero_vector(float** V, int L) 
 {
   int l = 0;
-  *V = e_calloc(L, sizeof(double));
+  *V = e_calloc(L, sizeof(float));
 
   while ( l < L ) {
     (*V)[l] = 0.0;
@@ -267,11 +267,11 @@ int   init_zero_vector(double** V, int L)
   return 0;
 }
 
-double*   get_zero_vector(int L) 
+float*   get_zero_vector(int L) 
 {
   int l = 0;
-  double *p;
-  p = e_calloc(L, sizeof(double));
+  float *p;
+  p = e_calloc(L, sizeof(float));
 
   while ( l < L ) {
     p[l] = 0.0;
@@ -281,14 +281,14 @@ double*   get_zero_vector(int L)
   return p;
 }
 
-int   free_vector(double** V)
+int   free_vector(float** V)
 {
   free(*V);
   *V = NULL;
   return 0;
 }
 
-void  copy_vector(double* A, double* B, int L)
+void  copy_vector(float* A, float* B, int L)
 {
   int l = 0;
 
@@ -298,7 +298,7 @@ void  copy_vector(double* A, double* B, int L)
   }
 }
 
-void  matrix_add(double** A, double** B, int R, int C)
+void  matrix_add(float** A, float** B, int R, int C)
 {
   int r = 0, c = 0;
 
@@ -312,7 +312,7 @@ void  matrix_add(double** A, double** B, int R, int C)
   }
 }
 
-void  vector_set_to_zero(double* V, int L )
+void  vector_set_to_zero(float* V, int L )
 {
   int l = 0;
   while ( l < L )
@@ -320,7 +320,7 @@ void  vector_set_to_zero(double* V, int L )
 }
 
 
-void  matrix_set_to_zero(double** A, int R, int C)
+void  matrix_set_to_zero(float** A, int R, int C)
 {
   int r = 0, c = 0;
 
@@ -334,7 +334,7 @@ void  matrix_set_to_zero(double** A, int R, int C)
   }
 }
 
-void  matrix_substract(double** A, double** B, int R, int C)
+void  matrix_substract(float** A, float** B, int R, int C)
 {
   int r = 0, c = 0;
 
@@ -348,7 +348,7 @@ void  matrix_substract(double** A, double** B, int R, int C)
   }
 }
 
-void  matrix_scalar_multiply(double** A, double b, int R, int C)
+void  matrix_scalar_multiply(float** A, float b, int R, int C)
 {
   int r = 0, c = 0;
 
@@ -361,7 +361,7 @@ void  matrix_scalar_multiply(double** A, double b, int R, int C)
     ++r;
   }
 }
-void  matrix_clip(double** A, double limit, int R, int C)
+void  matrix_clip(float** A, float limit, int R, int C)
 {
   int r = 0, c = 0;
 
@@ -378,10 +378,10 @@ void  matrix_clip(double** A, double limit, int R, int C)
   }
 }
 
-double one_norm(double* V, int L)
+float one_norm(float* V, int L)
 {
   int l = 0;
-  double norm = 0.0;
+  float norm = 0.0;
   while ( l < L ) {
     norm += fabs(V[l]);
     ++l;
@@ -390,11 +390,11 @@ double one_norm(double* V, int L)
   return norm;
 }
 
-int   vectors_fit(double* V, double limit, int L)
+int   vectors_fit(float* V, float limit, int L)
 {
   int l = 0;
   int msg = 0;
-  double norm;
+  float norm;
   while ( l < L ) {
     if ( V[l] > limit || V[l] < -limit ) {
       msg = 1;
@@ -410,7 +410,7 @@ int   vectors_fit(double* V, double limit, int L)
   return msg;
 }
 
-int   vectors_clip(double* V, double limit, int L)
+int   vectors_clip(float* V, float limit, int L)
 {
   int l = 0;
   int msg = 0;
@@ -428,7 +428,7 @@ int   vectors_clip(double* V, double limit, int L)
   return msg;
 }
 
-void  matrix_store(double ** A, int R, int C, FILE * fp) 
+void  matrix_store(float ** A, int R, int C, FILE * fp) 
 {
   int r = 0, c = 0;
   size_t i = 0;
@@ -438,7 +438,7 @@ void  matrix_store(double ** A, int R, int C, FILE * fp)
     c = 0;
     while ( c < C ) {
       i = 0; p = (char*)&A[r][c];
-      while ( i < sizeof(double) ) {
+      while ( i < sizeof(float) ) {
         fputc(*(p), fp);
         ++i; ++p;
       }
@@ -449,11 +449,11 @@ void  matrix_store(double ** A, int R, int C, FILE * fp)
 
 }
 
-void  vector_print_min_max(char *name, double *V, int L)
+void  vector_print_min_max(char *name, float *V, int L)
 {
   int l = 0;
-  double min = 100;
-  double max = -100;
+  float min = 100;
+  float max = -100;
   while ( l < L ) {
     if ( V[l] > max )
       max = V[l];
@@ -461,21 +461,21 @@ void  vector_print_min_max(char *name, double *V, int L)
       min = V[l];
     ++l;
   }
-  printf("%s min: %.10lf, max: %.10lf\n", name, min, max);
+  printf("%s min: %.10f, max: %.10f\n", name, min, max);
 }
 
-void  matrix_read(double ** A, int R, int C, FILE * fp) 
+void  matrix_read(float ** A, int R, int C, FILE * fp) 
 {
   int r = 0, c = 0;
   size_t i = 0;
   char *p;
-  double value;
+  float value;
 
   while ( r < R ) {
     c = 0;
     while ( c < C ) {
       i = 0; p = (char*)&value;
-      while ( i < sizeof(double) ) {
+      while ( i < sizeof(float) ) {
         *(p) = fgetc(fp);
         ++i; ++p;
       }
@@ -487,7 +487,7 @@ void  matrix_read(double ** A, int R, int C, FILE * fp)
 
 }
 
-void  vector_store(double* V, int L, FILE * fp)
+void  vector_store(float* V, int L, FILE * fp)
 {
   int l = 0;
   size_t i = 0;
@@ -495,7 +495,7 @@ void  vector_store(double* V, int L, FILE * fp)
 
   while ( l < L ) {
     i = 0; p = (char*)&V[l];
-    while ( i < sizeof(double) ) {
+    while ( i < sizeof(float) ) {
       fputc(*(p), fp);
       ++i; ++p;
     }
@@ -503,16 +503,16 @@ void  vector_store(double* V, int L, FILE * fp)
   }
 }
 
-void  vector_read(double * V, int L, FILE * fp) 
+void  vector_read(float * V, int L, FILE * fp) 
 {
   int l = 0;
   size_t i = 0;
   char *p;
-  double value;
+  float value;
 
   while ( l < L ) {
     i = 0; p = (char*)&value;
-    while ( i < sizeof(double) ) {
+    while ( i < sizeof(float) ) {
       *(p) = fgetc(fp);
       ++i; ++p;
     }
@@ -522,22 +522,22 @@ void  vector_read(double * V, int L, FILE * fp)
 
 }
 
-void  vector_store_ascii(double* V, int L, FILE * fp)
+void  vector_store_ascii(float* V, int L, FILE * fp)
 {
   int l = 0;
 
   while ( l < L ) {
-    fprintf(fp, "%.20lf\r\n", V[l]);
+    fprintf(fp, "%.20f\r\n", V[l]);
     ++l;
   }
 }
 
-void  vector_read_ascii(double * V, int L, FILE * fp)
+void  vector_read_ascii(float * V, int L, FILE * fp)
 {
   int l = 0;
 
   while ( l < L ) {
-    if ( fscanf(fp, "%lf", &V[l]) <= 0 ) {
+    if ( fscanf(fp, "%f", &V[l]) <= 0 ) {
       fprintf(stderr, "%s.%s Failed to read file\r\n",
         __FILE__, __func__);
       exit(1);
@@ -551,7 +551,7 @@ void  vector_read_ascii(double * V, int L, FILE * fp)
 *   This function is used to store a JSON file representation
 *   of a LSTM neural network that can be read by an HTML application.
 */
-void  vector_store_as_matrix_json(double* V, int R, int C, FILE * fp)
+void  vector_store_as_matrix_json(float* V, int R, int C, FILE * fp)
 {
   int r = 0, c = 0;
 
@@ -593,7 +593,7 @@ void  vector_store_as_matrix_json(double* V, int R, int C, FILE * fp)
 *   This function is used to store a JSON file representation
 *   of a LSTM neural network that can be read by an HTML application.
 */
-void  vector_store_json(double* V, int L, FILE * fp)
+void  vector_store_json(float* V, int L, FILE * fp)
 {
   int l = 0;
 
@@ -618,22 +618,22 @@ void  vector_store_json(double* V, int L, FILE * fp)
 /*
 * Gaussian generator: https://phoxis.org/2013/05/04/generating-random-numbers-from-normal-distribution-in-c/
 */
-double
-randn (double mu, double sigma)
+float
+randn (float mu, float sigma)
 {
-  double U1, U2, W, mult;
-  static double X1, X2;
+  float U1, U2, W, mult;
+  static float X1, X2;
   static int call = 0;
  
   if (call == 1)
   {
     call = !call;
-    return (mu + sigma * (double) X2);
+    return (mu + sigma * (float) X2);
   }
 
   do {
-    U1 = -1 + ((double) rand () / RAND_MAX) * 2;
-    U2 = -1 + ((double) rand () / RAND_MAX) * 2;
+    U1 = -1 + ((float) rand () / RAND_MAX) * 2;
+    U2 = -1 + ((float) rand () / RAND_MAX) * 2;
     W = pow (U1, 2) + pow (U2, 2);
   } while ( W >= 1 || W == 0 );
  
@@ -643,16 +643,16 @@ randn (double mu, double sigma)
  
   call = !call;
  
-  return (mu + sigma * (double) X1);
+  return (mu + sigma * (float) X1);
 }
 
-double sample_normal() {
-  double u = ((double) rand() / (RAND_MAX)) * 2 - 1;
-  double v = ((double) rand() / (RAND_MAX)) * 2 - 1;
-  double r = u * u + v * v;
+float sample_normal() {
+  float u = ((float) rand() / (RAND_MAX)) * 2 - 1;
+  float v = ((float) rand() / (RAND_MAX)) * 2 - 1;
+  float r = u * u + v * v;
   if (r == 0 || r > 1)
     return sample_normal();
-  double c = sqrt(-2 * log(r) / r);
+  float c = sqrt(-2 * log(r) / r);
   return u * c;
 }
 

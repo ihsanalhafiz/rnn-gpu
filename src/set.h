@@ -46,11 +46,11 @@ typedef struct set_t {
 int set_insert_symbol(set_t*, char);
 char set_indx_to_char(set_t*, int);
 int set_char_to_indx(set_t*, char);
-int set_probability_choice(set_t*, double*);
-int set_greedy_argmax(set_t*, double*);
+int set_probability_choice(set_t*, float*);
+int set_greedy_argmax(set_t*, float*);
 int set_get_features(set_t*);
 
-void set_print(set_t*, double*);
+void set_print(set_t*, float*);
 
 void initialize_set(set_t*);
 

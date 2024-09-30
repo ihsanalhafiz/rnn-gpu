@@ -35,16 +35,16 @@
 *
 *  A(rows: R, columns: C)
 */
-void fully_connected_forward(double* Y, double* A, double* X,
-	double* b, int R, int C);
+void fully_connected_forward(float* Y, float* A, float* X,
+	float* b, int R, int C);
 /**		Y = AX + b
 * 
 * A(rows: R, columns: C)
 *
 * dld* points to gradients
 */
-void fully_connected_backward(double* dldY, double* A, double* X,double* dldA,
-  double* dldX, double* dldb, int R, int C);
+void fully_connected_backward(float* dldY, float* A, float* X,float* dldA,
+  float* dldX, float* dldb, int R, int C);
 
 /** Softmax layer forward propagation
 *
@@ -53,7 +53,7 @@ void fully_connected_backward(double* dldY, double* A, double* X,double* dldA,
 * @param temperature calibration of softmax, the lower the spikier
 * @param F len ( Y )  
 */
-void softmax_layers_forward(double* P, double* Y, int F, double temperature);
+void softmax_layers_forward(float* P, float* Y, int F, float temperature);
 /** Softmax layer backward propagation
 *
 * @param P sum ( exp(y/temperature) ) for y in Y
@@ -61,7 +61,7 @@ void softmax_layers_forward(double* P, double* Y, int F, double temperature);
 * @param dldh gradients back to Y, given \p c
 * @param F len ( Y )  
 */
-void softmax_loss_layer_backward(double* P, int c, double* dldh, int F);
+void softmax_loss_layer_backward(float* P, int c, float* dldh, int F);
 
 // Other layers used: sigmoid and tanh
 // 	
@@ -69,18 +69,18 @@ void softmax_loss_layer_backward(double* P, int c, double* dldh, int F);
 *
 * L = len(X) 
 */
-void sigmoid_forward(double* Y, double* X, int L);
+void sigmoid_forward(float* Y, float* X, int L);
 /** Y = sigmoid(X), dldY, Y, &dldX, length */
-void sigmoid_backward(double* dldY, double* Y, double* dldX, int L);
+void sigmoid_backward(float* dldY, float* Y, float* dldX, int L);
 /** Y = tanh(X), &Y, X, length */
-void tanh_forward(double* Y, double* X, int L);
+void tanh_forward(float* Y, float* X, int L);
 /** Y = tanh(X), dldY, Y, &dldX, length */
-void tanh_backward(double* dldY, double* Y, double* dldX, int L);
+void tanh_backward(float* dldY, float* Y, float* dldX, int L);
 
 /** The loss function used in the output layer of the LSTM network, which is a softmax layer 
 * \see softmax_layers_forward
 * @param probabilities array with output from \ref softmax_layers_forward 
 * @param correct the index that represents the correct observation
 */
-double cross_entropy(double* probabilities, int correct);
+float cross_entropy(float* probabilities, int correct);
 

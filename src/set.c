@@ -73,12 +73,12 @@ set_char_to_indx(set_t* set, char c)
 }
 
 int
-set_probability_choice(set_t* set, double* probs)
+set_probability_choice(set_t* set, float* probs)
 {
   int i = 0;
-  double sum = 0, random_value;
+  float sum = 0, random_value;
 
-  random_value = ((double) rand())/RAND_MAX;
+  random_value = ((float) rand())/RAND_MAX;
 
   while ( i < SET_MAX_CHARS ) {
     sum += probs[i];
@@ -105,7 +105,7 @@ set_get_features(set_t* set)
 }
 
 void 
-set_print(set_t* set, double* probs)
+set_print(set_t* set, float* probs)
 {
   int i = 0;
   while ( set->values[i] != 0 && i < SET_MAX_CHARS ) {
@@ -118,15 +118,15 @@ set_print(set_t* set, double* probs)
 }
 
 int 
-set_greedy_argmax(set_t* set, double* probs)
+set_greedy_argmax(set_t* set, float* probs)
 {
   int i = 0;
   int max_i = 0;
-  double max_double = 0.0;
+  float max_float = 0.0;
   while ( set->values[i] != 0 && i < SET_MAX_CHARS ) {
-    if ( probs[i] > max_double ) {
+    if ( probs[i] > max_float ) {
       max_i = i;
-      max_double = probs[i];
+      max_float = probs[i];
     }
     ++i;
   }

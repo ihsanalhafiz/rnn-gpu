@@ -1,0 +1,1 @@
+/usr/bin/cc -rdynamic CMakeFiles/net.dir/main.c.o CMakeFiles/net.dir/layers.c.o CMakeFiles/net.dir/lstm.c.o CMakeFiles/net.dir/set.c.o CMakeFiles/net.dir/utilities.c.o -o net 

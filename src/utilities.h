@@ -36,61 +36,61 @@
 
 // used on contigous vectors
 //		A = A + B		A,		B,    l
-void 	vectors_add(double*, double*, int);
-void 	vectors_substract(double*, double*, int);
-void 	vectors_add_scalar_multiply(double*, double*, int, double);
-void 	vectors_scalar_multiply(double*, double, int);
-void 	vectors_substract_scalar_multiply(double*, double*, int, double);
-void 	vectors_add_scalar(double*, double, int );
-void 	vectors_div(double*, double*, int);
-void 	vector_sqrt(double*, int);
-void 	vector_store_json(double*, int, FILE *);
-void 	vector_store_as_matrix_json(double*, int, int, FILE *);
+void 	vectors_add(float*, float*, int);
+void 	vectors_substract(float*, float*, int);
+void 	vectors_add_scalar_multiply(float*, float*, int, float);
+void 	vectors_scalar_multiply(float*, float, int);
+void 	vectors_substract_scalar_multiply(float*, float*, int, float);
+void 	vectors_add_scalar(float*, float, int );
+void 	vectors_div(float*, float*, int);
+void 	vector_sqrt(float*, int);
+void 	vector_store_json(float*, int, FILE *);
+void 	vector_store_as_matrix_json(float*, int, int, FILE *);
 //		A = A + B		A,		B,    R, C
-void 	matrix_add(double**, double**, int, int);
-void 	matrix_substract(double**, double**, int, int);
+void 	matrix_add(float**, float**, int, int);
+void 	matrix_substract(float**, float**, int, int);
 //		A = A*b		A,		b,    R, C
-void 	matrix_scalar_multiply(double**, double, int, int);
+void 	matrix_scalar_multiply(float**, float, int, int);
 
 //		A = A * B		A,		B,    l
-void 	vectors_multiply(double*, double*, int);
+void 	vectors_multiply(float*, float*, int);
 //		A = A * b		A,		b,    l
-void 	vectors_mutliply_scalar(double*, double, int);
+void 	vectors_mutliply_scalar(float*, float, int);
 //		A = random( (R, C) ) / sqrt(R / 2), &A, R, C
-int 	init_random_matrix(double***, int, int);
+int 	init_random_matrix(float***, int, int);
 //		A = 0.0s, &A, R, C
-int 	init_zero_matrix(double***, int, int);
-int 	free_matrix(double**, int);
+int 	init_zero_matrix(float***, int, int);
+int 	free_matrix(float**, int);
 //						 V to be set, Length
-int 	init_zero_vector(double**, int);
-int 	free_vector(double**);
+int 	init_zero_vector(float**, int);
+int 	free_vector(float**);
 //		A = B       A,		B,		length
-void 	copy_vector(double*, double*, int);
-double* 	get_zero_vector(int); 
-double** 	get_zero_matrix(int, int);
-double** 	get_random_matrix(int, int);
-double* 	get_random_vector(int,int);
+void 	copy_vector(float*, float*, int);
+float* 	get_zero_vector(int); 
+float** 	get_zero_matrix(int, int);
+float** 	get_random_matrix(int, int);
+float* 	get_random_vector(int,int);
 
-void 	matrix_set_to_zero(double**, int, int);
-void 	vector_set_to_zero(double*, int);
+void 	matrix_set_to_zero(float**, int, int);
+void 	vector_set_to_zero(float*, int);
 
-double sample_normal(void);
-double randn(double, double);
+float sample_normal(void);
+float randn(float, float);
 
-double one_norm(double*, int);
+float one_norm(float*, int);
 
-void matrix_clip(double**, double, int, int);
-int vectors_fit(double*, double, int);
-int vectors_clip(double*, double, int);
+void matrix_clip(float**, float, int, int);
+int vectors_fit(float*, float, int);
+int vectors_clip(float*, float, int);
 
 // I/O
-void 	vector_print_min_max(char *, double *, int);
-void 	vector_read(double *, int, FILE *);
-void 	vector_store(double *, int, FILE *);
-void 	matrix_store(double **, int, int, FILE *);  
-void 	matrix_read(double **, int, int, FILE *);
-void 	vector_read_ascii(double *, int, FILE *);
-void 	vector_store_ascii(double *, int, FILE *);
+void 	vector_print_min_max(char *, float *, int);
+void 	vector_read(float *, int, FILE *);
+void 	vector_store(float *, int, FILE *);
+void 	matrix_store(float **, int, int, FILE *);  
+void 	matrix_read(float **, int, int, FILE *);
+void 	vector_read_ascii(float *, int, FILE *);
+void 	vector_store_ascii(float *, int, FILE *);
 
 // Memory
 void*   e_calloc(size_t count, size_t size);

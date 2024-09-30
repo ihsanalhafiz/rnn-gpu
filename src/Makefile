@@ -1,33 +1,53 @@
+# Compiler settings
 CC := gcc
-FLAGS := O3 Ofast msse3
-LIBS := m
+NVCC := nvcc
+
+# Compiler flags
+CFLAGS := -g -O3 -msse3
+NVCCFLAGS := -g -O3 -arch=sm_75   # For RTX 2070
+
+# Libraries
+LIBS := -lm -lcudart -lcublas
+LIBSGCC := m
+# GCC warnings
 GCC_HINTS := all \
-  unused \
-  uninitialized \
-  no-unused-variable \
-  extra \
-  unused-parameter
+    unused \
+    uninitialized \
+    no-unused-variable \
+    extra \
+    unused-parameter
 
-.PHONY : net clean
+# Source files
+C_SRCS := layers.c \
+          lstm.c \
+          main.c \
+          set.c \
+          utilities.c
 
-SRCS := layers.c \
-		lstm.c \
-		main.c \
-		set.c \
-		utilities.c
+CU_SRCS := lstm_cuda.cu
 
-OBJS := $(subst .c,.o,$(SRCS))
+# Object files
+C_OBJS := $(C_SRCS:.c=.o)
+CU_OBJS := $(CU_SRCS:.cu=.o)
 
-all: net
+# Phony targets
+.PHONY: clean all 
 
-%.o : %.c
-	$(CC) -c $< $(addprefix -, $(FLAGS)) $(addprefix -W, $(GCC_HINTS)) \
-		$(addprefix -l, $(LIBS)) -o $@
+# Default target
+all: clean net
 
-net: $(OBJS)
-	$(CC) $^ $(addprefix -, $(FLAGS)) $(addprefix -W, $(GCC_HINTS)) \
-		$(addprefix -l, $(LIBS)) -o $@
+# Compile C source files
+%.o: %.c
+	$(CC) -c $< $(CFLAGS) $(addprefix -W, $(GCC_HINTS)) $(addprefix -l, $(LIBSGCC)) -o $@
 
+# Compile CUDA source files
+%.o: %.cu
+	$(NVCC) -c $< $(NVCCFLAGS) -o $@
+
+# Link object files
+net: $(C_OBJS) $(CU_OBJS)
+	$(NVCC) $^ -o $@ $(LIBS)
+
+# Clean up
 clean:
-	rm -f $(OBJS)
-
+	rm -f $(C_OBJS) $(CU_OBJS) net

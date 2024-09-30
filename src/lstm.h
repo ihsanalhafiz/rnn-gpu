@@ -63,21 +63,21 @@
 
 typedef struct lstm_model_parameters_t {
   // For progress monitoring
-  double loss_moving_avg;
+  float loss_moving_avg;
   // For gradient descent
-  double learning_rate;
-  double momentum;
-  double lambda;
-  double softmax_temp;
-  double beta1;
-  double beta2;
+  float learning_rate;
+  float momentum;
+  float lambda;
+  float softmax_temp;
+  float beta1;
+  float beta2;
   int gradient_clip;
   int gradient_fit;
   int optimizer;
   int model_regularize;
   int stateful;
   int decrease_lr;
-  double learning_rate_decrease;
+  float learning_rate_decrease;
 
   // How many layers
   unsigned int layers;
@@ -101,7 +101,7 @@ typedef struct lstm_model_parameters_t {
 
   // General parameters
   unsigned int mini_batch_size;
-  double gradient_clip_limit;
+  float gradient_clip_limit;
   unsigned long iterations;
   unsigned long epochs;
 } lstm_model_parameters_t;
@@ -117,68 +117,68 @@ typedef struct lstm_model_t
   lstm_model_parameters_t * params;
 
   // The model
-  double* Wf;
-  double* Wi;
-  double* Wc;
-  double* Wo;
-  double* Wy;
-  double* bf;
-  double* bi;
-  double* bc;
-  double* bo;
-  double* by;
+  float* Wf;
+  float* Wi;
+  float* Wc;
+  float* Wo;
+  float* Wy;
+  float* bf;
+  float* bi;
+  float* bc;
+  float* bo;
+  float* by;
 
   // cache
-  double* dldh;
-  double* dldho;
-  double* dldhf;
-  double* dldhi;
-  double* dldhc;
-  double* dldc;
+  float* dldh;
+  float* dldho;
+  float* dldhf;
+  float* dldhi;
+  float* dldhc;
+  float* dldc;
 
-  double* dldXi;
-  double* dldXo;
-  double* dldXf;
-  double* dldXc;
+  float* dldXi;
+  float* dldXo;
+  float* dldXf;
+  float* dldXc;
 
   // Gradient descent momentum
-  double* Wfm;
-  double* Wim;
-  double* Wcm;
-  double* Wom;
-  double* Wym;
-  double* bfm;
-  double* bim;
-  double* bcm;
-  double* bom;
-  double* bym;
+  float* Wfm;
+  float* Wim;
+  float* Wcm;
+  float* Wom;
+  float* Wym;
+  float* bfm;
+  float* bim;
+  float* bcm;
+  float* bom;
+  float* bym;
 
 } lstm_model_t;
 
 typedef struct lstm_values_cache_t {
-  double* probs;
-  double* probs_before_sigma;
-  double* c;
-  double* h;
-  double* c_old;
-  double* h_old;
-  double* X;
-  double* hf;
-  double* hi;
-  double* ho;
-  double* hc;
-  double* tanh_c_cache;
+  float* probs;
+  float* probs_before_sigma;
+  float* c;
+  float* h;
+  float* c_old;
+  float* h_old;
+  float* X;
+  float* hf;
+  float* hi;
+  float* ho;
+  float* hc;
+  float* tanh_c_cache;
 } lstm_values_cache_t;
 
 typedef struct lstm_values_state_t {
-  double* c;
-  double* h;
+  float* c;
+  float* h;
 } lstm_values_state_t;
 
 typedef struct lstm_values_next_cache_t {
-  double* dldh_next;
-  double* dldc_next;
-  double* dldY_pass;
+  float* dldh_next;
+  float* dldc_next;
+  float* dldY_pass;
 } lstm_values_next_cache_t;
 
 /**
@@ -214,9 +214,9 @@ void lstm_free_model(lstm_model_t *lstm);
 * @param model model to be used, must been initialized with \ref lstm_init_model
 * \see lstm_init_model
 */ 
-void lstm_forward_propagate(lstm_model_t *model, double *input, 
+void lstm_forward_propagate(lstm_model_t *model, float *input, 
   lstm_values_cache_t *cache_in, lstm_values_cache_t *cache_out, int softmax);
-void lstm_backward_propagate(lstm_model_t*, double*, int, lstm_values_next_cache_t*, lstm_values_cache_t*, lstm_model_t*, lstm_values_next_cache_t*);
+void lstm_backward_propagate(lstm_model_t*, float*, int, lstm_values_next_cache_t*, lstm_values_cache_t*, lstm_model_t*, lstm_values_next_cache_t*);
 
 void lstm_values_state_init(lstm_values_state_t** d_next_to_set, int N);
 void lstm_values_next_state_free(lstm_values_state_t* d_next);
@@ -265,7 +265,7 @@ mapping in the JSON file.
 */ 
 void lstm_store_net_layers_as_json(lstm_model_t** model, const char * filename, 
   const char *set_name, set_t *set, unsigned int layers);
-void lstm_store_progress(const char*, unsigned int, double);
+void lstm_store_progress(const char*, unsigned int, float);
 
 /**
 * This is the entry point to the realm of black magic.
@@ -287,7 +287,7 @@ moving average filter, after the training has been completed.
 */ 
 void lstm_train(lstm_model_t** model, lstm_model_parameters_t*params,
   set_t* set, unsigned int training_points, int *X, int *Y, unsigned int layers,
-  double *loss);
+  float *loss);
 /**
 * If you are training on textual data, this function can be used 
 * to sample and output from the network directly to stdout. 

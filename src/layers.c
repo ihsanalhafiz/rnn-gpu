@@ -39,7 +39,7 @@
 #endif
 
 //    Y = AX + b        &Y,      A,       X,    B,     Rows (for A), Columns (for A)
-void  fully_connected_forward(double* Y, double* A, double* X, double* b, int R, int C)
+void  fully_connected_forward(float* Y, float* A, float* X, float* b, int R, int C)
 {
   int i = 0, n = 0;
   while ( i < R ) {
@@ -54,8 +54,8 @@ void  fully_connected_forward(double* Y, double* A, double* X, double* b, int R,
 
 }
 //    Y = AX + b        dldY,       A,     X,        &dldA,    &dldX,    &dldb   Rows (A), Columns (A)
-void  fully_connected_backward(double* dldY, double* A, double* X,double* dldA,
-  double* dldX, double* dldb, int R, int C)
+void  fully_connected_backward(float* dldY, float* A, float* X,float* dldA,
+  float* dldX, float* dldb, int R, int C)
 {
   int i = 0, n = 0;
 
@@ -91,29 +91,29 @@ void  fully_connected_backward(double* dldY, double* A, double* X,double* dldA,
   }
 }
 
-double cross_entropy(double* probabilities, int correct)
+float cross_entropy(float* probabilities, int correct)
 {
   return -log(probabilities[correct]);  
 }
 
 // Dealing with softmax layer, forward and backward
 //                &P,   Y,    features
-void  softmax_layers_forward(double* P, double* Y, int F, double temperature)  
+void  softmax_layers_forward(float* P, float* Y, int F, float temperature)  
 {
   int f = 0;
-  double sum = 0;
+  float sum = 0;
 #ifdef WINDOWS
   // MSVC is not a C99 compiler, and does not support variable length arrays
   // MSVC is documented as conforming to C90
-  double *cache = malloc(sizeof(double)*F);
+  float *cache = malloc(sizeof(float)*F);
 
   if ( cache == NULL ) {
     fprintf(stderr, "%s.%s.%d malloc(%zu) failed\r\n", 
-      __FILE__, __func__, __LINE__, sizeof(double)*F);
+      __FILE__, __func__, __LINE__, sizeof(float)*F);
     exit(1);
   }
 #else
-  double cache[F];
+  float cache[F];
 #endif
 
   while ( f < F ) {
@@ -133,7 +133,7 @@ void  softmax_layers_forward(double* P, double* Y, int F, double temperature)
 #endif
 }
 //                    P,    c,  &dldh, rows
-void  softmax_loss_layer_backward(double* P, int c, double* dldh, int R)
+void  softmax_loss_layer_backward(float* P, int c, float* dldh, int R)
 { 
   int r = 0;
 
@@ -147,7 +147,7 @@ void  softmax_loss_layer_backward(double* P, int c, double* dldh, int R)
 // Other layers used: sigmoid and tanh
 //  
 //    Y = sigmoid(X), &Y, X, length
-void  sigmoid_forward(double* Y, double* X, int L)
+void  sigmoid_forward(float* Y, float* X, int L)
 {
   int l = 0;
 
@@ -158,7 +158,7 @@ void  sigmoid_forward(double* Y, double* X, int L)
 
 }
 //    Y = sigmoid(X), dldY, Y, &dldX, length
-void  sigmoid_backward(double* dldY, double* Y, double* dldX, int L) 
+void  sigmoid_backward(float* dldY, float* Y, float* dldX, int L) 
 {
   int l = 0;
 
@@ -169,7 +169,7 @@ void  sigmoid_backward(double* dldY, double* Y, double* dldX, int L)
 
 }
 //    Y = tanh(X), &Y, X, length
-void  tanh_forward(double* Y, double* X, int L)
+void  tanh_forward(float* Y, float* X, int L)
 {
   int l = 0;
   while ( l < L ) {
@@ -178,7 +178,7 @@ void  tanh_forward(double* Y, double* X, int L)
   }
 }
 //    Y = tanh(X), dldY, Y, &dldX, length
-void  tanh_backward(double* dldY, double* Y, double* dldX, int L)
+void  tanh_backward(float* dldY, float* Y, float* dldX, int L)
 {
   int l = 0;
   while ( l < L ) {

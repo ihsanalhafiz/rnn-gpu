@@ -361,7 +361,7 @@ Reallocating space in network input and output layer to accommodate this new fea
     lstm_output_string_from_string(model_layers, &set, seed, params.layers, 256);
 
   } else {
-    double loss;
+    float loss;
 
     assert(params.layers > 0);
 
